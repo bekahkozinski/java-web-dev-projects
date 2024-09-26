@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class MenuItem {
     private String name;
@@ -9,8 +10,6 @@ public class MenuItem {
 
     private String category;
 
-    private boolean isNew;
-
     private final LocalDate dateAdded;
 
     public MenuItem(String name, String description, double price, String category) {
@@ -18,8 +17,21 @@ public class MenuItem {
         this.description = description;
         this.price = price;
         this.category = category;
-        this.dateAdded = LocalDate.now();
+        this.dateAdded = LocalDate.parse("2024-09-26");
     }
+
+    boolean isNew() {
+        LocalDate future = dateAdded.plusDays(90);
+        long days = future.until(dateAdded, ChronoUnit.DAYS);
+        return days <= 0;
+    }
+
+    @Override
+    public String toString() {
+        String newText = isNew() ? " - NEW!" : "";
+        return name + newText + "\n" + description + " | $" + price;
+    }
+
 
     public String getName() {
         return name;
@@ -51,14 +63,6 @@ public class MenuItem {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public boolean isNew() {
-        return isNew;
-    }
-
-    public void setNew(boolean aNew) {
-        isNew = aNew;
     }
 
     public LocalDate getDateAdded() {
