@@ -7,7 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class BalancedBracketsTest {
     //TODO: add tests here
     @Test
-    public void emptyTest() {
-        assertEquals(true, true);
+    public void onlyBracketsReturnsTrue() {
+        String message = "a single set of balanced brackets returns true"
+                assertTrue(BalancedBrackets.hasBalancedBrackets("[]"), message);
     }
 }
